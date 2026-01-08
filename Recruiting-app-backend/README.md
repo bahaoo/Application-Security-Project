@@ -11,5 +11,5 @@ is not actually needed. You may first need to execute `chmod +x mvnw`.
 ./mvnw clean package wildfly:run
 ```
 
-Once the runtime starts, you can access the project at [http://localhost:8080/Recruiting-app](http://localhost:8080/Recruiting-app).
+Once the runtime starts, you can access the project at [http://localhost:8080/Recruiting-app-backend-v2](http://localhost:8080/Recruiting-app-backend-v2).
 

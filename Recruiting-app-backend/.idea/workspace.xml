@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8524d52b-d9db-4527-9bb0-5d19ba0c3215" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/boundaries/AuthenticationEndpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/boundaries/JWKEndpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/boundaries/TokenEndpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/AuthorizationDecorator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/GrantController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/IAMIdentityStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/IAMRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/SignupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/Grant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/GrantPK.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/Identity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/Tenant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/security/Argon2Utility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/security/AuthorizationCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/security/JwtManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../to inspire from/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../to inspire from/main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/RestApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/ApplicationResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/AuthResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/ForensicsResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/JobResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/AccessLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/Job.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/security/PasswordUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/security/SecurityFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/security/TokenService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/watermark/WatermarkPayload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/watermark/WatermarkService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/create-schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/jakartaee_logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ayoubbenomrane&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/bahaoo/Application-Security-Project.git&quot;,
+    &quot;accountId&quot;: &quot;c597d47c-f9ef-473d-832c-bcf9ae636e06&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="37nTXqO8cHRb5h0YwOsigT9t8vT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/ayoub/RealDesk/Recruiting APP/Recruiting-app-backend",
+    "settings.editor.selected.configurable": "build.tools"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.eclipse.jakarta.IAM" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Recruiting-app-backend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Recruiting-app-backend" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8524d52b-d9db-4527-9bb0-5d19ba0c3215" name="Changes" comment="" />
+      <created>1767537877555</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1767537877555</updated>
+    </task>
+    <servers />
+  </component>
+</project>
