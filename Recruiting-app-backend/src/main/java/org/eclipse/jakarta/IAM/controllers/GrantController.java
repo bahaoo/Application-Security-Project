@@ -34,7 +34,8 @@ public class GrantController {
     private IAMRepository iamRepository;
 
     /**
-     * Issues a new grant from a candidate (identity) to a tenant (client application).
+     * Issues a new grant from a candidate (identity) to a tenant (client
+     * application).
      * 
      * This method creates a permission record that allows the tenant to access
      * the candidate's resources within the specified scopes.
@@ -44,7 +45,8 @@ public class GrantController {
      * @param scopes     Space-separated string of OAuth2 scopes being granted
      *                   (e.g., "profile email read:jobs")
      * @return the persisted Grant object containing the authorization details
-     * @throws IllegalArgumentException if either the tenant or identity is not found
+     * @throws IllegalArgumentException if either the tenant or identity is not
+     *                                  found
      */
     public Grant issueGrant(Short tenantId, Long identityId, String scopes) {
         // Retrieve the tenant and identity from the database
@@ -71,9 +73,11 @@ public class GrantController {
     }
 
     /**
-     * Revokes a previously issued grant, removing the tenant's access to the identity's resources.
+     * Revokes a previously issued grant, removing the tenant's access to the
+     * identity's resources.
      * 
-     * This allows users to withdraw consent they previously gave to a client application.
+     * This allows users to withdraw consent they previously gave to a client
+     * application.
      * If no matching grant exists, this method silently completes without error.
      * 
      * @param tenantId   ID of the tenant whose access is being revoked
@@ -87,7 +91,8 @@ public class GrantController {
     }
 
     /**
-     * Checks if a valid grant exists between a tenant and identity, optionally verifying
+     * Checks if a valid grant exists between a tenant and identity, optionally
+     * verifying
      * that specific scopes are included in the grant.
      * 
      * This method is used during authorization to verify that a client application
@@ -95,20 +100,22 @@ public class GrantController {
      * 
      * @param tenantId       ID of the tenant (client application) to check
      * @param identityId     ID of the identity (user) whose grant is being verified
-     * @param requiredScopes Space-separated string of scopes that must be present in the grant.
+     * @param requiredScopes Space-separated string of scopes that must be present
+     *                       in the grant.
      *                       If null or empty, only checks for grant existence.
-     * @return true if the grant exists and includes all required scopes, false otherwise
+     * @return true if the grant exists and includes all required scopes, false
+     *         otherwise
      */
     public boolean checkGrant(Short tenantId, Long identityId, String requiredScopes) {
         // Attempt to find an existing grant between the tenant and identity
         Optional<Grant> grantOpt = iamRepository.findGrant(tenantId, identityId);
-        
+
         // If no grant exists, access is denied
         if (grantOpt.isEmpty())
             return false;
 
         Grant grant = grantOpt.get();
-        
+
         // If no specific scopes are required, the existence of the grant is sufficient
         if (requiredScopes == null || requiredScopes.isEmpty())
             return true;
@@ -117,7 +124,7 @@ public class GrantController {
         // Scopes are space-separated (per OAuth2 spec)
         String[] required = requiredScopes.split(" ");
         String[] approved = grant.getApprovedScopes().split(" ");
-        
+
         // Check each required scope against the approved scopes
         for (String r : required) {
             boolean found = false;

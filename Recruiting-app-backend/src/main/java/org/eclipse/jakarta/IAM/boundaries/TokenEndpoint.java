@@ -34,11 +34,11 @@ public class TokenEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response token(@FormParam("grant_type") String grantType,
-                          @FormParam("code") String authCode,
-                          @FormParam("code_verifier") String codeVerifier,
-                          @FormParam("client_id") String clientId,
-                          @FormParam("client_secret") String clientSecret,
-                          @FormParam("refresh_token") String refreshToken) {
+            @FormParam("code") String authCode,
+            @FormParam("code_verifier") String codeVerifier,
+            @FormParam("client_id") String clientId,
+            @FormParam("client_secret") String clientSecret,
+            @FormParam("refresh_token") String refreshToken) {
 
         if (grantType == null || grantType.isEmpty()) {
             return responseError("invalid_request", "grant_type is required", Response.Status.BAD_REQUEST);
@@ -64,7 +64,8 @@ public class TokenEndpoint {
             // Authorization code flow
             AuthorizationCode decoded = AuthorizationCode.decode(authCode, codeVerifier);
             if (decoded == null) {
-                return responseError("invalid_grant", "Invalid authorization code or code_verifier", Response.Status.BAD_REQUEST);
+                return responseError("invalid_grant", "Invalid authorization code or code_verifier",
+                        Response.Status.BAD_REQUEST);
             }
 
             // Check expiration
@@ -84,13 +85,11 @@ public class TokenEndpoint {
                     tenant.getClientId(),
                     identity.getUsername(),
                     decoded.approvedScopes(),
-                    new String[]{"USER"}
-            );
+                    new String[] { "USER" });
             String newRefreshToken = jwtManager.generateRefreshToken(
                     tenant.getClientId(),
                     identity.getUsername(),
-                    decoded.approvedScopes()
-            );
+                    decoded.approvedScopes());
 
             JsonObject response = Json.createObjectBuilder()
                     .add("token_type", "Bearer")
@@ -106,7 +105,7 @@ public class TokenEndpoint {
                     .build();
 
         } catch (Exception e) {
-            return responseError("server_error", "Unable to process token request: " + e.getMessage(), 
+            return responseError("server_error", "Unable to process token request: " + e.getMessage(),
                     Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
@@ -128,13 +127,11 @@ public class TokenEndpoint {
                     tenant.getClientId(),
                     subject,
                     scope,
-                    new String[]{"USER"}
-            );
+                    new String[] { "USER" });
             String newRefreshToken = jwtManager.generateRefreshToken(
                     tenant.getClientId(),
                     subject,
-                    scope
-            );
+                    scope);
 
             JsonObject response = Json.createObjectBuilder()
                     .add("token_type", "Bearer")

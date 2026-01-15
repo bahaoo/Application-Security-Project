@@ -34,7 +34,7 @@ public class IAMIdentityStore implements IdentityStore {
     private CredentialValidationResult validate(UsernamePasswordCredential upc) {
         try {
             Identity identity = entityManager.createQuery(
-                            "SELECT i FROM Identity i WHERE i.username = :username", Identity.class)
+                    "SELECT i FROM Identity i WHERE i.username = :username", Identity.class)
                     .setParameter("username", upc.getCaller())
                     .getSingleResult();
 
@@ -67,15 +67,15 @@ public class IAMIdentityStore implements IdentityStore {
         try {
             identityOpt = Optional.ofNullable(
                     entityManager.createQuery(
-                                    "SELECT i FROM Identity i WHERE i.username = :username", Identity.class)
+                            "SELECT i FROM Identity i WHERE i.username = :username", Identity.class)
                             .setParameter("username", username)
-                            .getSingleResult()
-            );
+                            .getSingleResult());
         } catch (Exception e) {
             return false;
         }
 
-        if (identityOpt.isEmpty()) return false;
+        if (identityOpt.isEmpty())
+            return false;
 
         Identity identity = identityOpt.get();
         return Argon2Utility.check(identity.getPassword(), rawPassword.toCharArray());
