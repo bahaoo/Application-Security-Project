@@ -4,48 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8524d52b-d9db-4527-9bb0-5d19ba0c3215" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/boundaries/AuthenticationEndpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/boundaries/JWKEndpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/boundaries/TokenEndpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/AuthorizationDecorator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/GrantController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/IAMIdentityStore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/IAMRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/controllers/SignupController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/Grant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/GrantPK.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/Identity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/entities/Tenant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/security/Argon2Utility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/security/AuthorizationCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/eclipse/jakarta/IAM/security/JwtManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../to inspire from/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../to inspire from/main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/RestApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/ApplicationResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/AuthResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/ForensicsResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/api/JobResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/AccessLog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/Job.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/security/PasswordUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/security/SecurityFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/security/TokenService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/watermark/WatermarkPayload.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recruiting/watermark/WatermarkService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/create-schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/jakartaee_logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" />
-    </list>
+    <list default="true" id="8524d52b-d9db-4527-9bb0-5d19ba0c3215" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

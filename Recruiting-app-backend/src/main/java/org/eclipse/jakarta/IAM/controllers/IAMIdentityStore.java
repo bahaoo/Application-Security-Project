@@ -1,8 +1,8 @@
 package org.eclipse.jakarta.IAM.controllers;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.security.enterprise.credential.Credential;
 import jakarta.security.enterprise.credential.UsernamePasswordCredential;
 import jakarta.security.enterprise.identitystore.CredentialValidationResult;
@@ -16,11 +16,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-@Singleton
+@ApplicationScoped
 @Transactional
 public class IAMIdentityStore implements IdentityStore {
 
-    @Inject
+    @PersistenceContext(unitName = "iam")
     private EntityManager entityManager;
 
     @Override

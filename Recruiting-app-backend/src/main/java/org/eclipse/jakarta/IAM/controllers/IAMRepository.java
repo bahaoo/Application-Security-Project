@@ -1,19 +1,21 @@
 package org.eclipse.jakarta.IAM.controllers;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.eclipse.jakarta.IAM.entities.Grant;
+import org.eclipse.jakarta.IAM.entities.GrantPK;
 import org.eclipse.jakarta.IAM.entities.Identity;
 import org.eclipse.jakarta.IAM.entities.Tenant;
 
 import java.util.Optional;
 
-@Singleton
+@ApplicationScoped
 public class IAMRepository {
 
-    @Inject
+    @PersistenceContext(unitName = "iam")
     private EntityManager entityManager;
 
     // ===== Tenant =====
@@ -30,6 +32,23 @@ public class IAMRepository {
         }
     }
 
+    public Optional<Tenant> findTenantByClientId(String clientId) {
+        try {
+            Tenant tenant = entityManager.createQuery(
+                            "SELECT t FROM Tenant t WHERE t.clientId = :clientId",
+                            Tenant.class
+                    ).setParameter("clientId", clientId)
+                    .getSingleResult();
+            return Optional.of(tenant);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<Tenant> findTenantById(Short id) {
+        return Optional.ofNullable(entityManager.find(Tenant.class, id));
+    }
+
     // ===== Identity =====
     public Optional<Identity> findIdentityByUsername(String username) {
         try {
@@ -42,6 +61,10 @@ public class IAMRepository {
         } catch (NoResultException e) {
             return Optional.empty();
         }
+    }
+
+    public Optional<Identity> findIdentityById(Long id) {
+        return Optional.ofNullable(entityManager.find(Identity.class, id));
     }
 
     // ===== Grant =====
@@ -64,18 +87,33 @@ public class IAMRepository {
     }
 
     // ===== Save operations =====
-    public Identity saveIdentity(Identity identity) {
-        entityManager.persist(identity);
-        return identity;
+    @Transactional
+    public Identity save(Identity identity) {
+        if (identity.getId() == null) {
+            entityManager.persist(identity);
+            return identity;
+        } else {
+            return entityManager.merge(identity);
+        }
     }
 
-    public Tenant saveTenant(Tenant tenant) {
-        entityManager.persist(tenant);
-        return tenant;
+    @Transactional
+    public Tenant save(Tenant tenant) {
+        if (tenant.getId() == null) {
+            entityManager.persist(tenant);
+            return tenant;
+        } else {
+            return entityManager.merge(tenant);
+        }
     }
 
-    public Grant saveGrant(Grant grant) {
-        entityManager.persist(grant);
-        return grant;
+    @Transactional
+    public Grant save(Grant grant) {
+        return entityManager.merge(grant);
+    }
+
+    @Transactional
+    public void deleteGrant(Grant grant) {
+        entityManager.remove(entityManager.contains(grant) ? grant : entityManager.merge(grant));
     }
 }

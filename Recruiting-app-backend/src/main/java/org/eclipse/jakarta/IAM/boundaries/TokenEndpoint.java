@@ -9,14 +9,15 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.jakarta.IAM.controllers.IAMRepository;
+import org.eclipse.jakarta.IAM.entities.Identity;
+import org.eclipse.jakarta.IAM.entities.Tenant;
 import org.eclipse.jakarta.IAM.security.AuthorizationCode;
+import org.eclipse.jakarta.IAM.security.JwtManager;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 @Path("/oauth/token")
 public class TokenEndpoint {
@@ -26,12 +27,18 @@ public class TokenEndpoint {
     @Inject
     private IAMRepository iamRepository;
 
+    @Inject
+    private JwtManager jwtManager;
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response token(@FormParam("grant_type") String grantType,
                           @FormParam("code") String authCode,
-                          @FormParam("code_verifier") String codeVerifier) {
+                          @FormParam("code_verifier") String codeVerifier,
+                          @FormParam("client_id") String clientId,
+                          @FormParam("client_secret") String clientSecret,
+                          @FormParam("refresh_token") String refreshToken) {
 
         if (grantType == null || grantType.isEmpty()) {
             return responseError("invalid_request", "grant_type is required", Response.Status.BAD_REQUEST);
@@ -43,40 +50,54 @@ public class TokenEndpoint {
         }
 
         try {
-            if ("refresh_token".equals(grantType)) {
-                // Simplified dummy refresh token flow
-                String dummyAccessToken = "access-" + UUID.randomUUID();
-                String dummyRefreshToken = "refresh-" + UUID.randomUUID();
+            // Validate client
+            Optional<Tenant> tenantOpt = iamRepository.findTenantByClientId(clientId);
+            if (tenantOpt.isEmpty()) {
+                return responseError("invalid_client", "Unknown client", Response.Status.UNAUTHORIZED);
+            }
+            Tenant tenant = tenantOpt.get();
 
-                JsonObject response = Json.createObjectBuilder()
-                        .add("token_type", "Bearer")
-                        .add("access_token", dummyAccessToken)
-                        .add("expires_in", 3600)
-                        .add("scope", "demo_scope")
-                        .add("refresh_token", dummyRefreshToken)
-                        .build();
-                return Response.ok(response)
-                        .header("Cache-Control", "no-store")
-                        .header("Pragma", "no-cache")
-                        .build();
+            if ("refresh_token".equals(grantType)) {
+                return handleRefreshToken(refreshToken, tenant);
             }
 
             // Authorization code flow
             AuthorizationCode decoded = AuthorizationCode.decode(authCode, codeVerifier);
             if (decoded == null) {
-                return responseError("invalid_grant", "Invalid authorization code", Response.Status.BAD_REQUEST);
+                return responseError("invalid_grant", "Invalid authorization code or code_verifier", Response.Status.BAD_REQUEST);
             }
 
-            // Generate dummy tokens
-            String dummyAccessToken = "access-" + UUID.randomUUID();
-            String dummyRefreshToken = "refresh-" + UUID.randomUUID();
+            // Check expiration
+            if (decoded.expirationDate() < System.currentTimeMillis() / 1000) {
+                return responseError("invalid_grant", "Authorization code has expired", Response.Status.BAD_REQUEST);
+            }
+
+            // Find identity
+            Optional<Identity> identityOpt = iamRepository.findIdentityByUsername(decoded.identityUsername());
+            if (identityOpt.isEmpty()) {
+                return responseError("invalid_grant", "User not found", Response.Status.BAD_REQUEST);
+            }
+            Identity identity = identityOpt.get();
+
+            // Generate real JWT tokens
+            String accessToken = jwtManager.generateAccessToken(
+                    tenant.getClientId(),
+                    identity.getUsername(),
+                    decoded.approvedScopes(),
+                    new String[]{"USER"}
+            );
+            String newRefreshToken = jwtManager.generateRefreshToken(
+                    tenant.getClientId(),
+                    identity.getUsername(),
+                    decoded.approvedScopes()
+            );
 
             JsonObject response = Json.createObjectBuilder()
                     .add("token_type", "Bearer")
-                    .add("access_token", dummyAccessToken)
+                    .add("access_token", accessToken)
                     .add("expires_in", 3600)
                     .add("scope", decoded.approvedScopes())
-                    .add("refresh_token", dummyRefreshToken)
+                    .add("refresh_token", newRefreshToken)
                     .build();
 
             return Response.ok(response)
@@ -85,7 +106,50 @@ public class TokenEndpoint {
                     .build();
 
         } catch (Exception e) {
-            return responseError("server_error", "Unable to process token request", Response.Status.INTERNAL_SERVER_ERROR);
+            return responseError("server_error", "Unable to process token request: " + e.getMessage(), 
+                    Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private Response handleRefreshToken(String refreshToken, Tenant tenant) {
+        try {
+            // Validate the refresh token
+            var jwtOpt = jwtManager.validateJWT(refreshToken);
+            if (jwtOpt.isEmpty()) {
+                return responseError("invalid_grant", "Invalid or expired refresh token", Response.Status.BAD_REQUEST);
+            }
+
+            var jwt = jwtOpt.get();
+            String subject = jwt.getJWTClaimsSet().getSubject();
+            String scope = (String) jwt.getJWTClaimsSet().getClaim("scope");
+
+            // Generate new tokens
+            String newAccessToken = jwtManager.generateAccessToken(
+                    tenant.getClientId(),
+                    subject,
+                    scope,
+                    new String[]{"USER"}
+            );
+            String newRefreshToken = jwtManager.generateRefreshToken(
+                    tenant.getClientId(),
+                    subject,
+                    scope
+            );
+
+            JsonObject response = Json.createObjectBuilder()
+                    .add("token_type", "Bearer")
+                    .add("access_token", newAccessToken)
+                    .add("expires_in", 3600)
+                    .add("scope", scope != null ? scope : "")
+                    .add("refresh_token", newRefreshToken)
+                    .build();
+
+            return Response.ok(response)
+                    .header("Cache-Control", "no-store")
+                    .header("Pragma", "no-cache")
+                    .build();
+        } catch (Exception e) {
+            return responseError("invalid_grant", "Failed to refresh token", Response.Status.BAD_REQUEST);
         }
     }
 
